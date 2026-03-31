@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ICANJ – India Christian Assembly, New Jersey</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* HERO */
+.hero{position:relative;min-height:calc(100vh - 108px);display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0d0d0d;}
+.hero-vid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.hero-vid iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:177.78vh;min-width:100%;height:56.25vw;min-height:100%;pointer-events:none;opacity:0.55;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,0.85) 0%,rgba(13,13,13,0.6) 60%,rgba(0,100,160,0.18) 100%);}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:780px;}
+.hero h1{font-family:'Inter',sans-serif;font-size:clamp(44px,7vw,88px);font-weight:800;color:#fff;line-height:1.04;letter-spacing:-0.04em;margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--teal);}
+.hero-sub{font-size:18px;font-weight:400;color:var(--muted);line-height:1.7;max-width:500px;margin:0 auto 36px;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.hero-scroll-line{width:1px;height:40px;background:rgba(255,255,255,0.15);}
+.hero-scroll span{font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
+
+/* QUICK LINKS — 2 big cards */
+.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;}
+.ql-card{background:#ffffff;border:1px solid var(--border);border-radius:14px;padding:36px;display:flex;align-items:center;justify-content:space-between;gap:24px;transition:border-color 0.2s;cursor:pointer;text-decoration:none;color:inherit;}
+.ql-card:hover{border-color:var(--teal);}
+.ql-card:hover .ql-arrow{color:var(--teal);transform:translateX(4px);}
+.ql-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.ql-title{font-size:22px;font-weight:800;color:#1a1a1a;letter-spacing:-0.02em;margin-bottom:8px;}
+.ql-sub{font-size:14px;color:#555;line-height:1.65;}
+.ql-arrow{font-size:28px;color:#aaa;transition:all 0.2s;flex-shrink:0;}
+
+/* PASTOR */
+.pastor-card{background:#f0fbfc;border:1px solid var(--border);border-radius:14px;padding:32px;display:flex;align-items:center;gap:24px;margin-top:48px;}
+.pastor-av{width:96px;height:96px;border-radius:50%;background:#e0f7f9;border:3px solid var(--teal);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pastor-av img{width:100%;height:100%;object-fit:cover;}
+.pastor-av-fallback{font-size:28px;font-weight:800;color:var(--teal);}
+.pastor-name{font-size:20px;font-weight:800;color:#1a1a1a;letter-spacing:-0.02em;margin-bottom:4px;}
+.pastor-role{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+.pastor-quote{font-size:14px;color:#555;line-height:1.7;font-style:italic;}
+
+/* STATS */
+.stats-band{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-inner{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:44px 32px;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-n{font-size:50px;font-weight:800;color:var(--teal);letter-spacing:-0.03em;line-height:1;margin-bottom:8px;}
+.stat-n b{color:var(--teal);}
+.stat-l{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+
+/* CONNECT */
+.connect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px;}
+.cn-card{background:#ffffff;border-radius:12px;padding:24px;display:flex;align-items:center;gap:18px;border:1px solid var(--border);transition:border-color 0.2s;cursor:pointer;text-decoration:none;color:inherit;}
+.cn-card:hover{border-color:var(--teal);}
+.cn-icon{width:44px;height:44px;border-radius:10px;background:var(--teal-light);border:1px solid rgba(0,197,205,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cn-icon-dot{width:18px;height:18px;background:var(--teal);border-radius:4px;}
+.cn-title{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px;}
+.cn-sub{font-size:13px;color:#666;line-height:1.5;}
+
+@media(max-width:1024px){
+  .hero{min-height:auto;padding:100px 0 80px;}
+  .hero-scroll{display:none;}
+  .quick-links{grid-template-columns:1fr;}
+  .stats-inner{padding:0 16px;grid-template-columns:repeat(2,1fr);}
+  .stat{padding:28px 16px;}
+  .connect-grid{grid-template-columns:1fr;}
+  .pastor-card{flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:38px;}
+  .stat-n{font-size:38px;}
+}
+</style>
+</head>
+<body>
+<script src="header.js"></script>
+
+<section class="hero">
+  <div class="hero-vid">
+    <iframe src="https://www.youtube.com/embed/J9h4VWP13VI?autoplay=1&mute=1&loop=1&playlist=J9h4VWP13VI&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Hero background"></iframe>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Welcome to <em>ICANJ</em></h1>
+    <p class="hero-sub">A congregation rooted in Scripture, devoted to worship, and committed to every soul that walks through our doors.</p>
+    <div class="hero-btns">
+      <a href="visit.html" class="btn btn-primary btn-arrow">Plan Your Visit</a>
+      <a href="sermons.html" class="btn btn-outline-light">Watch Online</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n">25<b>+</b></div><div class="stat-l">Years of Ministry</div></div>
+    <div class="stat"><div class="stat-n">3<b>×</b></div><div class="stat-l">Weekly Services</div></div>
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Active Ministries</div></div>
+    <div class="stat"><div class="stat-n"><b>∞</b></div><div class="stat-l">Grace Available</div></div>
+  </div>
+</div>
+
+<section class="section" style="background:#ffffff;">
+  <div class="container">
+    <span class="eyebrow">Explore</span>
+    <h2 class="section-title">Get Started</h2>
+    <div class="quick-links">
+      <a href="about.html" class="ql-card">
+        <div><div class="ql-eyebrow">Who We Are</div><div class="ql-title">About Us</div><p class="ql-sub">Our mission, beliefs, leadership, and the story of ICANJ over 25+ years in New Jersey.</p></div>
+        <div class="ql-arrow">→</div>
+      </a>
+      <a href="events.html" class="ql-card">
+        <div><div class="ql-eyebrow">Coming Up</div><div class="ql-title">Events</div><p class="ql-sub">Good Friday, Easter, VBS 2026, Father's Day Picnic — see everything happening at ICANJ.</p></div>
+        <div class="ql-arrow">→</div>
+      </a>
+    </div>
+    <div class="pastor-card">
+      <div class="pastor-av">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80" alt="Pr Finney Thomas" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <span class="pastor-av-fallback" style="display:none;">FT</span>
+      </div>
+      <div>
+        <div class="pastor-name">Pr Finney Thomas</div>
+        <div class="pastor-role">Senior Pastor</div>
+        <div class="pastor-quote">"We are called to be a community of grace — where every person is seen, known, and loved by God."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#f4f4f4;">
+  <div class="container">
+    <span class="eyebrow">Get Involved</span>
+    <h2 class="section-title">Connect With Us</h2>
+    <div class="connect-grid">
+      <a href="visit.html" class="cn-card"><div class="cn-icon"><div class="cn-icon-dot"></div></div><div><div class="cn-title">Plan Your Visit</div><div class="cn-sub">Service times, directions &amp; what to expect on Sunday.</div></div></a>
+      <a href="ministries.html" class="cn-card"><div class="cn-icon"><div class="cn-icon-dot"></div></div><div><div class="cn-title">Join a Ministry</div><div class="cn-sub">Children, youth, worship, men's &amp; women's groups.</div></div></a>
+      <a href="connect.html" class="cn-card"><div class="cn-icon"><div class="cn-icon-dot"></div></div><div><div class="cn-title">Prayer Request</div><div class="cn-sub">Our pastoral team prays over every request submitted.</div></div></a>
+      <a href="https://icanj.churchcenter.com/giving" target="_blank" class="cn-card"><div class="cn-icon"><div class="cn-icon-dot"></div></div><div><div class="cn-title">Give Online</div><div class="cn-sub">Support our ministries, outreach &amp; missions.</div></div></a>
+    </div>
+  </div>
+</section>
+
+<script src="footer.js"></script>
+</body>
+</html>
